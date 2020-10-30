@@ -9,7 +9,7 @@ message AddClass {
     string class_name = 2;
 }
 
-message GetClass {
+message GetClassRoom {
     string class_uuid = 1;
 }
 

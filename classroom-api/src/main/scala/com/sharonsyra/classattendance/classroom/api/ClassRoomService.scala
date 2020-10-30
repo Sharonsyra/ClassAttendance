@@ -12,7 +12,7 @@ trait ClassRoomService extends BaseService {
 
   def addClass: ServiceCall[AddClass, ClassRoom]
 
-  def getClassRoom(class_uuid: String): ServiceCall[GetClass, ClassRoom]
+  def getClassRoom(class_uuid: String): ServiceCall[GetClassRoom, ClassRoom]
 
   def listClasses: ServiceCall[NotUsed, ListClassDetails]
 
