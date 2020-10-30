@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package com.sharonsyra.protobuf.classattendance;
+
+message Class {
+    string class_uuid = 1;
+    string class_name = 2;
+    bool is_active_session = 3;
+    Timestamp session_start = 4;
+    Timestamp session_end = 5;
+    repeated Student students = 6;
+    bool is_deleted = 7;
+    Timestamp created_at = 8;
+    Timestamp updated_at = 9;
+}
+
+message Student {
+    string student_uuid = 1;
+    string student_name = 2;
+    bool is_in_class = 3;
+    string current_class = 4;
+    bool is_deleted = 5;
+    Timestamp created_at = 6;
+    Timestamp updated_at = 7;
+}
+
+message Timestamp {
+    int64 seconds = 1;
+    int32 nanos = 2;
+}
+
+message ClassActivity {
+    string class_uuid = 1;
+    string class_name = 2;
+    bool active_session = 3;
+    repeated Student students = 4;
+}
+
+message ListClassDetails {
+    repeated ClassActivity class_activities = 1;
+}
+
+message StudentActivity {
+    string student_uuid = 1;
+    string student_name = 2;
+    bool is_in_class = 3;
+    string current_class = 4;
+}
+
+message ListStudentDetails {
+    repeated StudentActivity student_activities = 1;
+}

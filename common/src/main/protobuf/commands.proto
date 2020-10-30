@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package com.sharonsyra.protobuf.classattendance;
+
+import "protobuf/common.proto";
+
+message AddClass {
+    string class_uuid = 1;
+    string class_name = 2;
+}
+
+message GetClass {
+    string class_uuid = 1;
+}
+
+message RemoveClass {
+    string class_uuid = 1;
+}
+
+message CheckInStudent {
+    string class_uuid = 1;
+    string student_uuid = 2;
+    Timestamp check_in_time = 3;
+}
+
+message CheckOutStudent {
+    string class_uuid = 1;
+    string student_uuid = 2;
+    string reason = 3;
+    Timestamp check_out_time = 4;
+}
+
+message StartTimeLog {
+    string class_uuid = 1;
+    Timestamp started_at = 2;
+    // To add timer so that it ends the class automatically
+}
+
+message EndTimeLog {
+    string class_uuid = 1;
+    Timestamp ended_at = 2;
+}
+
+message AddStudent {
+    string student_uuid = 1;
+    string student_name = 2;
+}
+
+message GetStudent {
+    string student_uuid = 1;
+}
+
+message RemoveStudent {
+    string student_uuid = 1;
+}

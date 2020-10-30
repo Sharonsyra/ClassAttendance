@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package com.sharonsyra.protobuf.classattendance;
+
+import "protobuf/common.proto";
+
+message ClassAdded {
+    string class_uuid = 1;
+    string class_name = 2;
+}
+
+message ClassRemoved {
+    string class_uuid = 1;
+}
+
+message StudentCheckedIn {
+    string class_uuid = 1;
+    string class_name = 2;
+    Timestamp check_in_time = 3;
+}
+
+message StudentCheckedOut {
+    string class_uuid = 1;
+    string student_uuid = 2;
+    string reason = 3;
+    Timestamp check_out_time = 4;
+}
+
+message TimeLogStarted {
+    string class_uuid = 1;
+    Timestamp started_at = 2;
+}
+
+message TimeLogStopped {
+    string class_uuid = 1;
+    Timestamp ended_at = 2;
+}
+
+message StudentAdded {
+    string student_uuid = 1;
+    string student_name = 2;
+}
+
+message StudentRemoved {
+    string student_uuid = 1;
+}
