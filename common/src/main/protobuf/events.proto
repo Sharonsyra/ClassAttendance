@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.sharonsyra.protobuf.classattendance;
 
-import "protobuf/common.proto";
+import "common.proto";
 
 message ClassAdded {
     string class_uuid = 1;

@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package com.sharonsyra.protobuf.classattendance;
 
-message Class {
+message ClassRoom {
     string class_uuid = 1;
     string class_name = 2;
     bool is_active_session = 3;
     Timestamp session_start = 4;
     Timestamp session_end = 5;
-    repeated Student students = 6;
+    repeated string students = 6;
     bool is_deleted = 7;
     Timestamp created_at = 8;
     Timestamp updated_at = 9;
