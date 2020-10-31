@@ -15,7 +15,7 @@ message ClassRemoved {
 
 message StudentCheckedIn {
     string class_uuid = 1;
-    string class_name = 2;
+    string student_uuid = 2;
     Timestamp check_in_time = 3;
 }
 
@@ -31,7 +31,7 @@ message TimeLogStarted {
     Timestamp started_at = 2;
 }
 
-message TimeLogStopped {
+message TimeLogEnded {
     string class_uuid = 1;
     Timestamp ended_at = 2;
 }
