@@ -8,8 +8,17 @@ scalaVersion in ThisBuild := "2.13.3"
 
 lazy val `class-attendance-service` =
   (project in file("."))
-    .aggregate(`common`, `classroom-api`, `classroom`, `student-api`, `student`)
-    .settings(publishArtifact := false, skip in publish := true)
+    .aggregate(
+      `common`,
+      `classroom-api`,
+      `classroom`,
+      `student-api`,
+      `student`
+    )
+    .settings(
+      publishArtifact := false,
+      skip in publish := true
+    )
 
 lazy val `common` = (project in file("common"))
   .settings(
@@ -29,10 +38,17 @@ lazy val `classroom-api` = (project in file("classroom-api"))
   .dependsOn(`common`)
 
 lazy val `classroom` = (project in file("classroom"))
+  .enablePlugins(LagomScala, JavaAgent)
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(PlayAkkaHttp2Support)
   .enablePlugins(LagomAkka)
   .enablePlugins(LagomImpl)
   .settings(name := "classroom")
-  .dependsOn(`common`, `classroom-api`)
+  .settings(lagomForkedTestSettings)
+  .dependsOn(
+    `common`,
+    `classroom-api`
+  )
 
 lazy val `student-api` = (project in file("student-api"))
   .enablePlugins(LagomAkka)
@@ -41,7 +57,23 @@ lazy val `student-api` = (project in file("student-api"))
   .dependsOn(`common`)
 
 lazy val `student` = (project in file("student"))
+  .enablePlugins(LagomScala, JavaAgent)
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(PlayAkkaHttp2Support)
   .enablePlugins(LagomAkka)
   .enablePlugins(LagomImpl)
   .settings(name := "student")
-  .dependsOn(`common`, `student-api`)
+  .settings(lagomForkedTestSettings)
+  .dependsOn(
+    `common`,
+    `student-api`
+  )
+
+enablePlugins(DockerComposePlugin)
+
+dockerImageCreationTask := Seq(
+  (Docker / publishLocal in `classroom`).value,
+  (Docker / publishLocal in `student`).value
+)
+
+composeFile := s"${baseDirectory.value.absolutePath}/docker/docker-compose.yml"
